@@ -1,0 +1,44 @@
+---
+title: "3pt project"
+format: closeread-html
+---
+
+How the 3 point shot has changed over time
+
+```{r message=FALSE}
+library(tidyverse)
+data3 <- read.csv("data3.csv")
+
+EVpts <- data.frame(Shot = c("Layups/Dunks (Restricted Area)", "Midrange (5–22 ft)","3-Point Range (22 ft+)"), ExpectedPoints = c(1.331, 0.857, 1.136), stringsAsFactors = FALSE)
+
+
+ggplot(data3, aes(x = year, y = X3PA)) +
+  geom_point() +
+  labs(x="Year",y="3-Point Attempts (X3PA)", title = "Average 3-Point Attempts Per Game Over Time") +
+  theme_bw()+
+  theme(plot.title = element_text(face = "bold", hjust = 0.5), axis.text.x = element_text(size = 10, face = "bold"))
+
+ggplot(EVpts, aes(x = Shot, y = ExpectedPoints)) +
+  geom_col(fill = "lightblue", width = 0.5, color = "black") +
+  labs(x = "Shot Ranges", y = "Expected Points Per Shot", title = "Expected Points Value Vs. Range")+
+  theme_bw()+
+  theme(plot.title = element_text(face = "bold", hjust = 0.5), axis.text.x = element_text(size = 10, face = "bold"))+
+  geom_text(aes(label = sprintf("%.2f", ExpectedPoints)), vjust = -0.5)+
+  scale_y_continuous(limits = c(0, 1.5), expand = c(0, 0))
+```
+
+:::: cr-section
+Section with content to be handled by closeread.
+
+::: {#cr-sticky}
+Text that will be treated as the sticky element.
+
+This text will be \_stuck\_ as you scroll up and down.
+:::
+
+Text that triggers the sticky element. \@cr-sticky
+
+More text that will appear next to the sticky element as you scroll down.
+
+Last sentence that will show up next to the sticky element.
+::::
